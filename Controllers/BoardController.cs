@@ -88,6 +88,15 @@ namespace TaskManagmentApi.Controllers
             await Context.SaveChangesAsync();
         }
 
+        [Route("DeleteTask/{taskId}")]
+        [HttpDelete]
+        public async System.Threading.Tasks.Task DeleteTask(int taskId)
+        {
+            var task=await Context.Tasks.FindAsync(taskId);
+            Context.Remove(task);
+            await Context.SaveChangesAsync();
+        }
+
         [Route("InsertTask/{idBoard}/{idDeveloper}")]
         [HttpPost]
         public async System.Threading.Tasks.Task InsertTask(int idBoard,int idDeveloper,[FromBody] TaskManagmentApi.Models.Task task)
